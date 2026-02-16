@@ -1,0 +1,178 @@
+meta:
+  engine: 4.1.0
+units:
+  spacing: 2
+  pad: 3
+
+  push_x: .5cx + .5spacing
+  push_y: .5cy + .5spacing
+
+  # extra padding is helpful while prototyping, won't be in final pcb
+  pad_x: push_x + pad + 2
+  pad_y: push_y + pad + 2
+
+  # 1.5U units
+  x15u: 26.5
+  y15u: cy
+  spread15u: x15u - 2 - spacing
+  
+  # 2U Units
+  x2u: 35.5
+  y2u: cy
+  spread2u: x2u - 2 - spacing
+
+points:
+  key:
+    padding: cy + spacing
+    spread: cx + spacing
+    tags: 
+      - key
+  zones:
+    matrix:
+      key.spread: cx + spacing
+      anchor.shift: [50,-100] # Fix KiCad placement
+      columns:
+        control:
+        pinky.key.stagger: 0 cy
+        ring.key.stagger: 0.25 cy
+        middle.key.stagger: 0.25 cy
+        index.key.stagger: -0.25 cy
+        inner:
+      rows:
+        bottom:
+        home:
+        top:
+        num.padding: cy + 4
+        f:
+    thumb:
+      anchor:
+        - ref: matrix_middle_bottom
+          shift: [0, -cy - 2 * pad]
+      columns:
+        c0:
+          key:
+            tags: key
+        c1:
+          key:
+            stagger: -.25 cy
+        c2:
+          key:
+            shift: [0, -5]
+            tags:
+              - key_15u_y
+        # c3:
+        #   key:
+        #     shift: [-cx - spacing, cy + spacing]
+      rows: 
+        r0:
+outlines:
+  keys:
+    - what: rectangle
+      where: true
+      size: [14, 14]
+      fillet: 0
+  keycaps:
+    - what: rectangle
+      where: [key]
+      size: [17.5, 16.5]
+    - what: rectangle
+      where: [key_15u]
+      size: [x15u, y15u]
+    - what: rectangle
+      where: [key_15u_y]
+      size: [y15u, x15u]
+    - what: rectangle
+      where: [key_2u]
+      size: [x2u, y2u]
+  board:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        # top of keyboard
+        - ref: matrix_control_f
+          shift: [-pad_x, pad_y]
+        - ref: matrix_control_f
+          shift: [push_x - pad, pad_y]
+
+        - ref: matrix_pinky_f
+          shift: [-push_x, pad_y]
+        - ref: matrix_pinky_f
+          shift: [push_x - pad, pad_y]
+
+        - ref: matrix_ring_f
+          shift: [-push_x, pad_y]
+        - ref: matrix_ring_f
+          shift: [push_x - pad, pad_y]
+        
+        - ref: matrix_middle_f
+          shift: [-push_x, pad_y]
+        - ref: matrix_middle_f
+          shift: [push_x, pad_y]
+
+        - ref: matrix_index_f
+          shift: [-push_x + pad, pad_y]
+        - ref: matrix_inner_f
+          shift: [pad_x, pad_y]
+
+        # wrap around thumb fan
+        - ref: matrix_inner_bottom
+          shift: [pad_x, -push_y]
+        
+        - ref: thumb_c2_r0
+          shift: [pad_x, push_y + pad]
+        - ref: thumb_c2_r0
+          shift: [pad_x, -y15u/2 + pad - pad_y]
+        - ref: thumb_c2_r0
+          shift: [-push_x - pad, -y15u/2 + pad - pad_y]
+
+        - ref: thumb_c1_r0
+          shift: [push_x - pad, -pad_y]
+        - ref: thumb_c1_r0
+          shift: [-push_x - pad, -pad_y]
+
+        - ref: thumb_c0_r0
+          shift: [push_x - pad, -pad_y]
+        - ref: thumb_c0_r0
+          shift: [-push_x - pad, -pad_y]
+
+        - ref: matrix_ring_bottom
+          shift: [ push_x - pad, -pad_y]
+        - ref: matrix_ring_bottom
+          shift: [-push_x + spacing, -pad_y]
+        
+        - ref: matrix_pinky_bottom
+          shift: [push_x, -pad_y]
+        - ref: matrix_pinky_bottom
+          shift: [-push_x + spacing, -pad_y]
+
+        - ref: matrix_control_bottom
+          shift: [push_x, -pad_y]
+        - ref: matrix_control_bottom
+          shift: [-pad_x, -pad_y]
+
+  board_key_cutouts:
+    - name: board
+    - operation: subtract
+      name: keys
+  board_preview_keycaps:
+    - name: board
+    - operation: subtract
+      name: keycaps
+
+cases:
+  plate:
+    - name: board_key_cutouts
+      extrude: 1.2
+
+  # for prototyping / previewing the case
+  case_mockup:
+    - name: board_key_cutouts
+      extrude: 5
+
+  # plate_caps:
+
+  # key_cutouts:
+  #   - name: xl_board_left
+  #   - operation: subtract
+  #     name: keys
