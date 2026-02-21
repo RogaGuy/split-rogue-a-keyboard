@@ -2,14 +2,14 @@ meta:
   engine: 4.1.0
 units:
   spacing: 2
-  pad: 3
+  pad: 2
 
   push_x: .5cx + .5spacing
   push_y: .5cy + .5spacing
 
   # extra padding is helpful while prototyping, won't be in final pcb
-  pad_x: push_x + pad + 2
-  pad_y: push_y + pad + 2
+  pad_x: push_x + pad
+  pad_y: push_y + pad
 
   # 1.5U units
   x15u: 26.5
@@ -33,11 +33,11 @@ points:
       anchor.shift: [50,-100] # Fix KiCad placement
       columns:
         control:
-        pinky.key.stagger: 0 cy
+        pinky.key.stagger: .5 cy
         ring.key.stagger: 0.25 cy
         middle.key.stagger: 0.25 cy
         index.key.stagger: -0.25 cy
-        inner:
+        inner.key.stagger: -.25 cy
       rows:
         bottom:
         home:
@@ -47,17 +47,20 @@ points:
     thumb:
       anchor:
         - ref: matrix_middle_bottom
-          shift: [0, -cy - 2 * pad]
+          shift: [0, -cy -8]
       columns:
         c0:
           key:
             tags: key
         c1:
           key:
+            tags: key
             stagger: -.25 cy
         c2:
           key:
-            shift: [0, -5]
+            shift: [7, -5]
+            splay: -10
+            stagger: -.25cy
             tags:
               - key_15u_y
         # c3:
@@ -111,6 +114,11 @@ outlines:
           shift: [push_x, pad_y]
 
         - ref: matrix_index_f
+          shift: [-push_x + pad, pad_y]
+        - ref: matrix_index_f
+          shift: [push_x, pad_y]
+
+        - ref: matrix_inner_f
           shift: [-push_x + pad, pad_y]
         - ref: matrix_inner_f
           shift: [pad_x, pad_y]
