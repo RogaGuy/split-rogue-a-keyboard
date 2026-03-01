@@ -1,66 +1,66 @@
 meta:
   engine: 4.1.0
 units:
-  spacing: 2
+  spacing: 1
   pad: 2
 
-  push_x: .5cx + .5spacing
-  push_y: .5cy + .5spacing
+  push_x: .5U + .5spacing
+  push_y: .5U + .5spacing
+
+  U: 18.4
 
   # extra padding is helpful while prototyping, won't be in final pcb
   pad_x: push_x + pad
   pad_y: push_y + pad
 
   # 1.5U units
-  x15u: 26.5
-  y15u: cy
-  spread15u: x15u - 2 - spacing
+  x15u: U
+  y15u: 26.5
+  spread15u: 1.5U + spacing
   
   # 2U Units
-  x2u: 35.5
-  y2u: cy
-  spread2u: x2u - 2 - spacing
+  x2u: U
+  y2u: 35.5
+  spread2u: 2U - 2 - spacing
 
 points:
   key:
-    padding: cy + spacing
-    spread: cx + spacing
+    padding: U + spacing
+    spread: U + spacing
     tags: 
       - key
   zones:
     matrix:
-      key.spread: cx + spacing
+      key.spread: U + spacing
       anchor.shift: [50,-100] # Fix KiCad placement
       columns:
         control:
-        pinky.key.stagger: .5 cy
-        ring.key.stagger: 0.25 cy
-        middle.key.stagger: 0.25 cy
-        index.key.stagger: -0.25 cy
-        inner.key.stagger: -.25 cy
+        pinky.key.stagger: .5 U
+        ring.key.stagger: 0.25 U
+        middle.key.stagger: 0.25 U
+        index.key.stagger: -0.25 U
+        inner.key.stagger: -.25 U
       rows:
         bottom:
         home:
         top:
-        num.padding: cy + 4
-        f:
+        num:
     thumb:
+      key.spread: U + spacing
       anchor:
-        - ref: matrix_middle_bottom
-          shift: [0, -cy -8]
+        - ref: matrix_index_bottom
+          shift: [7, -U - 15]
       columns:
         c0:
           key:
-            tags: key
-        c1:
-          key:
-            tags: key
-            stagger: -.25 cy
+            shift: [0, -.25U]
+            splay: -10
+            # tags: key_15u_y
+            
         c2:
           key:
-            shift: [7, -5]
-            splay: -10
-            stagger: -.25cy
+            # splay: -10
+            # stagger: -.25cy
             tags:
               - key_15u_y
         # c3:
@@ -77,13 +77,13 @@ outlines:
   keycaps:
     - what: rectangle
       where: [key]
-      size: [17.5, 16.5]
+      size: [U, U]
     - what: rectangle
       where: [key_15u]
-      size: [x15u, y15u]
+      size: [1.5U, U]
     - what: rectangle
       where: [key_15u_y]
-      size: [y15u, x15u]
+      size: [U, 1.5U]
     - what: rectangle
       where: [key_2u]
       size: [x2u, y2u]
@@ -93,34 +93,34 @@ outlines:
       fillet: 2
       points:
         # top of keyboard
-        - ref: matrix_control_f
+        - ref: matrix_control_num
           shift: [-pad_x, pad_y]
-        - ref: matrix_control_f
+        - ref: matrix_control_num
           shift: [push_x - pad, pad_y]
 
-        - ref: matrix_pinky_f
-          shift: [-push_x, pad_y]
-        - ref: matrix_pinky_f
+        - ref: matrix_pinky_num
+          shift: [-push_x - pad, pad_y]
+        - ref: matrix_pinky_num
           shift: [push_x - pad, pad_y]
 
-        - ref: matrix_ring_f
-          shift: [-push_x, pad_y]
-        - ref: matrix_ring_f
+        - ref: matrix_ring_num
+          shift: [-push_x - pad, pad_y]
+        - ref: matrix_ring_num
           shift: [push_x - pad, pad_y]
         
-        - ref: matrix_middle_f
-          shift: [-push_x, pad_y]
-        - ref: matrix_middle_f
-          shift: [push_x, pad_y]
+        - ref: matrix_middle_num
+          shift: [-push_x - pad, pad_y]
+        - ref: matrix_middle_num
+          shift: [push_x + pad, pad_y]
 
-        - ref: matrix_index_f
+        - ref: matrix_index_num
           shift: [-push_x + pad, pad_y]
-        - ref: matrix_index_f
-          shift: [push_x, pad_y]
+        - ref: matrix_index_num
+          shift: [push_x + pad, pad_y]
 
-        - ref: matrix_inner_f
+        - ref: matrix_inner_num
           shift: [-push_x + pad, pad_y]
-        - ref: matrix_inner_f
+        - ref: matrix_inner_num
           shift: [pad_x, pad_y]
 
         # wrap around thumb fan
@@ -130,32 +130,32 @@ outlines:
         - ref: thumb_c2_r0
           shift: [pad_x, push_y + pad]
         - ref: thumb_c2_r0
-          shift: [pad_x, -y15u/2 + pad - pad_y]
+          shift: [pad_x, -pad_y - .25U]
         - ref: thumb_c2_r0
-          shift: [-push_x - pad, -y15u/2 + pad - pad_y]
-
-        - ref: thumb_c1_r0
-          shift: [push_x - pad, -pad_y]
-        - ref: thumb_c1_r0
-          shift: [-push_x - pad, -pad_y]
+          shift: [-push_x - pad, -pad_y -.25U]
 
         - ref: thumb_c0_r0
           shift: [push_x - pad, -pad_y]
         - ref: thumb_c0_r0
           shift: [-push_x - pad, -pad_y]
 
-        - ref: matrix_ring_bottom
+        - ref: matrix_middle_bottom
           shift: [ push_x - pad, -pad_y]
+        - ref: matrix_middle_bottom
+          shift: [-push_x + pad, -pad_y]
+        
         - ref: matrix_ring_bottom
-          shift: [-push_x + spacing, -pad_y]
+          shift: [ push_x + pad, -pad_y]
+        - ref: matrix_ring_bottom
+          shift: [-push_x + pad, -pad_y]
         
         - ref: matrix_pinky_bottom
-          shift: [push_x, -pad_y]
+          shift: [push_x + pad, -pad_y]
         - ref: matrix_pinky_bottom
-          shift: [-push_x + spacing, -pad_y]
+          shift: [-push_x + pad, -pad_y]
 
         - ref: matrix_control_bottom
-          shift: [push_x, -pad_y]
+          shift: [push_x + pad, -pad_y]
         - ref: matrix_control_bottom
           shift: [-pad_x, -pad_y]
 
