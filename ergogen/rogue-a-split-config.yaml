@@ -49,20 +49,20 @@ points:
       key.spread: U + spacing
       anchor:
         - ref: matrix_index_bottom
-          shift: [5, -cy - 20]
+          shift: [5, -U - 20]
       columns:
         c0:
           key:
-            shift: [0, .25cy + spacing]
+            shift: [0, .25U + .5spacing]
             splay: -10
             tags: key_15u_y
             
         c2:
           key:
-            shift: [0, -.5cy - spacing]
+            shift: [0, -.5U - .5spacing]
         c3:
           key:
-            shift: [-cx -1.5spacing, .5cy + 1.5spacing]
+            shift: [-U -spacing, .5U + .5spacing]
       rows: 
         r0:
 outlines:
@@ -132,9 +132,9 @@ outlines:
           shift: [-push_x - pad, -pad_y]
 
         - ref: thumb_c0_r0
-          shift: [push_x - pad, -pad_y - .25cy]
+          shift: [push_x - pad, -pad_y - .25U]
         - ref: thumb_c0_r0
-          shift: [-push_x - pad, -pad_y - .25cy]
+          shift: [-push_x - pad, -pad_y - .25U]
 
         - ref: matrix_middle_bottom
           shift: [ push_x - pad, -pad_y]
