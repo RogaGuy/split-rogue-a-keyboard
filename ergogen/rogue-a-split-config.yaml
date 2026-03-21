@@ -1,13 +1,14 @@
 meta:
   engine: 4.1.0
 units:
+  U: 18.4
   spacing: 1
   pad: 2
 
   push_x: .5U + .5spacing
   push_y: .5U + .5spacing
 
-  U: 18.4
+
 
   # extra padding is helpful while prototyping, won't be in final pcb
   pad_x: push_x + pad
