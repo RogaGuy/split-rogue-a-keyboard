@@ -49,23 +49,20 @@ points:
       key.spread: U + spacing
       anchor:
         - ref: matrix_index_bottom
-          shift: [7, -U - 15]
+          shift: [5, -cy - 20]
       columns:
         c0:
           key:
-            shift: [0, -.25U]
+            shift: [0, .25cy + spacing]
             splay: -10
-            # tags: key_15u_y
+            tags: key_15u_y
             
         c2:
           key:
-            # splay: -10
-            # stagger: -.25cy
-            tags:
-              - key_15u_y
-        # c3:
-        #   key:
-        #     shift: [-cx - spacing, cy + spacing]
+            shift: [0, -.5cy - spacing]
+        c3:
+          key:
+            shift: [-cx -1.5spacing, .5cy + 1.5spacing]
       rows: 
         r0:
 outlines:
@@ -123,21 +120,21 @@ outlines:
         - ref: matrix_inner_num
           shift: [pad_x, pad_y]
 
-        # wrap around thumb fan
+        # wrap around thumb cluster
         - ref: matrix_inner_bottom
           shift: [pad_x, -push_y]
-        
-        - ref: thumb_c2_r0
+        - ref: thumb_c3_r0
           shift: [pad_x, push_y + pad]
+
         - ref: thumb_c2_r0
-          shift: [pad_x, -pad_y - .25U]
+          shift: [pad_x, -pad_y]
         - ref: thumb_c2_r0
-          shift: [-push_x - pad, -pad_y -.25U]
+          shift: [-push_x - pad, -pad_y]
 
         - ref: thumb_c0_r0
-          shift: [push_x - pad, -pad_y]
+          shift: [push_x - pad, -pad_y - .25cy]
         - ref: thumb_c0_r0
-          shift: [-push_x - pad, -pad_y]
+          shift: [-push_x - pad, -pad_y - .25cy]
 
         - ref: matrix_middle_bottom
           shift: [ push_x - pad, -pad_y]
