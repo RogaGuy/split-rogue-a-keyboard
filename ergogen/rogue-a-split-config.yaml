@@ -55,13 +55,13 @@ points:
         c0:
           key:
             shift: [0, .25U + .5spacing]
-            splay: -10
+            splay: -20
             tags: key_15u_y
             
-        c2:
+        c1:
           key:
             shift: [0, -.5U - .5spacing]
-        c3:
+        c2:
           key:
             shift: [-U -spacing, .5U + .5spacing]
       rows: 
@@ -124,18 +124,26 @@ outlines:
         # wrap around thumb cluster
         - ref: matrix_inner_bottom
           shift: [pad_x, -push_y]
-        - ref: thumb_c3_r0
+        - ref: thumb_c2_r0
           shift: [pad_x, push_y + pad]
 
-        - ref: thumb_c2_r0
+        - ref: thumb_c1_r0
           shift: [pad_x, -pad_y]
-        - ref: thumb_c2_r0
+        - ref: thumb_c1_r0
           shift: [-push_x - pad, -pad_y]
 
         - ref: thumb_c0_r0
           shift: [push_x - pad, -pad_y - .25U]
         - ref: thumb_c0_r0
           shift: [-push_x - pad, -pad_y - .25U]
+
+        - ref: thumb_c0_r0
+          shift: [-push_x - pad, pad_y + .25U]
+
+        - ref: matrix_index_bottom
+          shift: [0, -pad_y]
+        - ref: matrix_index_bottom
+          shift: [-push_x - pad, -pad_y]
 
         - ref: matrix_middle_bottom
           shift: [ push_x - pad, -pad_y]
@@ -175,10 +183,3 @@ cases:
   case_mockup:
     - name: board_key_cutouts
       extrude: 5
-
-  # plate_caps:
-
-  # key_cutouts:
-  #   - name: xl_board_left
-  #   - operation: subtract
-  #     name: keys
